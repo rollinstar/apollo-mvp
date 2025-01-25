@@ -1,0 +1,24 @@
+version: '3.8'
+
+volumes:
+  geodb-data:
+
+services:
+  db:
+    container_name: apollo_postgis_db
+    image: postgis/postgis:15-3.3
+    volumes:
+      - "geodb-data:/var/lib/postgresql"
+    networks:
+      - apollo_net
+    environment:
+      POSTGRES_USER: bada
+      POSTGRES_PASSWORD: 1q2w3e4r
+      POSTGRES_DB: apollo
+      ALLOW_IP_RANGE: 0.0.0.0/0
+    ports:
+      - "5432:5432"
+    platform: linux/amd64
+
+networks:
+  apollo_net:
