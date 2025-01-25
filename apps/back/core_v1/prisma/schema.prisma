@@ -1,0 +1,66 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["auth", "iam", "public"]
+}
+
+model password {
+  password_no   BigInt
+  password_id   String @id @default(dbgenerated("auth.uuid_generate_v7()")) @db.Uuid
+  user_no       BigInt
+  password_hash String @db.VarChar(255)
+  created_at    BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
+  updated_at    BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
+
+  @@schema("auth")
+}
+
+model organizations {
+  organization_no BigInt  @id @default(autoincrement())
+  organization_id String  @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
+  name            String? @db.VarChar(50)
+  owner           BigInt
+  created_at      BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
+  updated_at      BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
+
+  @@schema("iam")
+}
+
+model storages {
+  storage_no       BigInt @id @default(autoincrement())
+  storage_id       String @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
+  organization_no  BigInt
+  assigned_storage BigInt
+  used_storage     BigInt
+  created_at       BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
+  updated_at       BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
+
+  @@schema("iam")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model users {
+  user_no    BigInt @id @default(autoincrement())
+  user_id    String @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
+  login_type String @db.VarChar(20)
+  created_at BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
+  updated_at BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
+
+  @@schema("iam")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String? @db.VarChar(256)
+  auth_srid Int?
+  srtext    String? @db.VarChar(2048)
+  proj4text String? @db.VarChar(2048)
+
+  @@schema("public")
+}
