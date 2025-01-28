@@ -1,0 +1,30 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier", "plugin:prettier/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "prettier", "simple-import-sort", "sort-exports"],
+  "rules": {
+    "no-useless-catch": "off",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "no-console": "warn",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "sort-exports/sort-exports": [
+      "error",
+      { "sortDir": "asc", "ignoreCase": true, "sortExportKindFirst": "type", "pattern": "**/*.ts" }
+    ]
+  },
+  "ignorePatterns": ["dist/", "node_modules/", "build/"]
+}

@@ -1,0 +1,11 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "module": "nodenext",
+    "rootDir": "./app",
+    "outDir": "./dist",
+    "declaration": false
+  },
+  "include": ["app"],
+  "exclude": ["node_modules", "dist"]
+}
