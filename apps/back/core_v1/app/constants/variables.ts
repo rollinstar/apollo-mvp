@@ -1,4 +1,5 @@
 const PORT: number = Number(process.env.PORT) || 3000;
+const SALT_ROUNDS = 10;
 const SWAGGER_OPTIONS = {
   swagger: {
     info: {
@@ -18,4 +19,4 @@ const SWAGGER_UI_OPTIONS = {
   exposeRoute: true,
 };
 
-export { PORT, SWAGGER_OPTIONS, SWAGGER_UI_OPTIONS };
+export { PORT, SALT_ROUNDS, SWAGGER_OPTIONS, SWAGGER_UI_OPTIONS };

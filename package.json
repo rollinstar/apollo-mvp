@@ -6,6 +6,9 @@
   "author": "rollinstar <junsh.rock@gmail.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "corev1": "yarn workspace core_v1"
+  },
   "workspaces": [
     "apps/back/core_v1"
   ],
