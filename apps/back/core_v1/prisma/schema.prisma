@@ -10,8 +10,8 @@ datasource db {
 }
 
 model password {
-  password_no   BigInt
-  password_id   String @id @default(dbgenerated("auth.uuid_generate_v7()")) @db.Uuid
+  password_no   BigInt @id @default(autoincrement())
+  password_id   String @default(dbgenerated("auth.uuid_generate_v7()")) @db.Uuid
   user_no       BigInt
   password_hash String @db.VarChar(255)
   created_at    BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
@@ -63,4 +63,30 @@ model spatial_ref_sys {
   proj4text String? @db.VarChar(2048)
 
   @@schema("public")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model authentication {
+  authentication_no BigInt @id @default(autoincrement())
+  authentication_id String @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
+  organization_no   BigInt
+  user_no           BigInt
+  email             String @db.VarChar(255)
+  role              String @db.VarChar(50)
+  created_at        BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
+  updated_at        BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
+
+  @@schema("iam")
+}
+
+model profile {
+  profile_no BigInt  @id @default(autoincrement())
+  profile_id String  @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
+  user_no    BigInt
+  name       String? @db.VarChar(255)
+  image_url  String? @db.VarChar(255)
+  created_at BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
+  updated_at BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
+
+  @@schema("iam")
 }
