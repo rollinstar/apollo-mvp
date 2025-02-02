@@ -12,35 +12,12 @@ datasource db {
 model password {
   password_no   BigInt @id @default(autoincrement())
   password_id   String @default(dbgenerated("auth.uuid_generate_v7()")) @db.Uuid
-  user_no       BigInt
+  user_no       BigInt @unique(map: "password_unique_userno")
   password_hash String @db.VarChar(255)
   created_at    BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
   updated_at    BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
 
   @@schema("auth")
-}
-
-model organizations {
-  organization_no BigInt  @id @default(autoincrement())
-  organization_id String  @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
-  name            String? @db.VarChar(50)
-  owner           BigInt
-  created_at      BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
-  updated_at      BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
-
-  @@schema("iam")
-}
-
-model storages {
-  storage_no       BigInt @id @default(autoincrement())
-  storage_id       String @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
-  organization_no  BigInt
-  assigned_storage BigInt
-  used_storage     BigInt
-  created_at       BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
-  updated_at       BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
-
-  @@schema("iam")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -71,7 +48,7 @@ model authentication {
   authentication_id String @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
   organization_no   BigInt
   user_no           BigInt
-  email             String @db.VarChar(255)
+  email             String @unique(map: "authentication_unique_email") @db.VarChar(255)
   role              String @db.VarChar(50)
   created_at        BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
   updated_at        BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
@@ -82,11 +59,34 @@ model authentication {
 model profile {
   profile_no BigInt  @id @default(autoincrement())
   profile_id String  @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
-  user_no    BigInt
+  user_no    BigInt  @unique(map: "profile_unique_userno")
   name       String? @db.VarChar(255)
   image_url  String? @db.VarChar(255)
   created_at BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
   updated_at BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
+
+  @@schema("iam")
+}
+
+model organization {
+  organization_no BigInt  @id(map: "organizations_pkey") @default(autoincrement())
+  organization_id String  @unique(map: "organization_unique_organizationid") @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
+  name            String? @db.VarChar(50)
+  owner           BigInt
+  created_at      BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
+  updated_at      BigInt  @default(dbgenerated("EXTRACT(epoch FROM now())"))
+
+  @@schema("iam")
+}
+
+model storage {
+  storage_no       BigInt @id(map: "storages_pkey") @default(autoincrement())
+  storage_id       String @default(dbgenerated("iam.uuid_generate_v7()")) @db.Uuid
+  organization_no  BigInt
+  assigned_storage BigInt
+  used_storage     BigInt
+  created_at       BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
+  updated_at       BigInt @default(dbgenerated("EXTRACT(epoch FROM now())"))
 
   @@schema("iam")
 }

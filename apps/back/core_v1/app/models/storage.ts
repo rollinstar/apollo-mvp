@@ -15,6 +15,6 @@ export const storageSchema = commonSchema.extend({
   storage_no: z.bigint(),
   storage_id: z.string(),
   organization_no: z.bigint(),
-  assigned_storage: z.number(),
-  used_storage: z.number(),
+  assigned_storage: z.bigint(),
+  used_storage: z.bigint(),
 });

@@ -17,8 +17,10 @@ export const db =
 
 // @ts-ignore
 db.$on('query', (e: Prisma.QueryEvent) => {
-  console.log('Query: ' + e.query);
-  console.log('Duration: ' + e.duration + 'ms');
+  console.debug(`timestamp: ${e.timestamp}`);
+  console.debug(`Params: ${e.params}`);
+  console.debug(`Query: ${e.query}`);
+  console.debug(`Duration: ${e.duration}ms`);
 });
 
 if (process.env.STAGE !== 'prod') globalThis.prisma = db;
