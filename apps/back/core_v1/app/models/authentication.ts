@@ -2,7 +2,10 @@ import { z } from 'zod';
 
 import { commonSchema } from './model';
 
-const roleTypeSchema = z.union([z.literal('admin'), z.literal('editor'), z.literal('viewer')]);
+/* eslint-disable sort-exports/sort-exports */
+export const roleTypeSchema = z.union([z.literal('admin'), z.literal('editor'), z.literal('viewer')]);
+
+export type ServiceRoleTypes = z.infer<typeof roleTypeSchema>;
 export type AuthenticationTypes = z.infer<typeof authenticationSchema>;
 export type CreateAuthenticationRequestDto = z.infer<typeof createAuthenticationRequestSchema>;
 export const authenticationSchema = commonSchema.extend({

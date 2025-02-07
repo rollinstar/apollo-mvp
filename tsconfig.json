@@ -3,7 +3,8 @@
     "target": "es6",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "lib": ["ES2021.String"]
   },
   "include": ["apps/**/*.ts"],
   "exclude": ["node_modules", "docker"],
