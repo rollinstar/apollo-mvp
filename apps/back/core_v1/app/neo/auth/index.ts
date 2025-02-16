@@ -1,6 +1,5 @@
+import { SALT_ROUNDS } from '@xcore/neo/constants/';
 import bcrypt from 'bcrypt';
-
-import { SALT_ROUNDS } from '../../constants';
 
 export const hashPassword = async (plainPassword: string): Promise<string> => {
   const salt = await bcrypt.genSalt(SALT_ROUNDS);

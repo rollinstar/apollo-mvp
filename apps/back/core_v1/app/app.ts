@@ -1,19 +1,16 @@
-import { decode } from 'node:punycode';
-
 import fastifyCookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import fjwt, { FastifyJWT } from '@fastify/jwt';
 import sensible from '@fastify/sensible';
 import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
+import userRoute from '@xcore/modules/routes/user.route';
+import { errorHandler } from '@xcore/neo/app-errors/helper';
+import { CORE_MVP, SWAGGER_OPTIONS, SWAGGER_UI_OPTIONS } from '@xcore/neo/constants';
+import { checkDatabaseConnection } from '@xcore/neo/health.check';
+import { AppSchemas } from '@xcore/schemas';
 import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-
-import { errorHandler } from './common/app-errors/helper';
-import { checkDatabaseConnection } from './common/health.check';
-import { CORE_MVP, SWAGGER_OPTIONS, SWAGGER_UI_OPTIONS } from './constants';
-import userRoute from './modules/routes/user.route';
-import { AppSchemas } from './schemas';
 
 const fastify = Fastify({ logger: true });
 

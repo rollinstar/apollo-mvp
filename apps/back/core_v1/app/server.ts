@@ -1,5 +1,5 @@
-import app from './app';
-import { PORT } from './constants/index';
+import app from '@xcore/app';
+import { PORT } from '@xcore/neo/constants';
 
 const listeners = ['SIGINT', 'SIGTERM'];
 listeners.forEach((signal) => {

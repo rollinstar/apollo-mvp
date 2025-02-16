@@ -1,5 +1,5 @@
-import { db } from '../../common/prisma';
-import { CreateAuthenticationRequestDto } from '../../models/authentication';
+import { CreateAuthenticationRequestDto } from '@xcore/models/authentication';
+import { db } from '@xcore/neo/db/prisma';
 
 export const create = async (payload: CreateAuthenticationRequestDto) => {
   return db.authentication.create({ data: { ...payload } });

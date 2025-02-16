@@ -1,11 +1,15 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "module": "nodenext",
-    "rootDir": "./app",
-    "outDir": "./dist",
-    "declaration": false
+    "rootDir": "./",
+    "outDir": "dist",
+    "lib": ["ES2021.String"],
+    "declaration": false,
+    "baseUrl": ".",
+    "paths": {
+      "@xcore/*": ["app/*"]
+    },
   },
-  "include": ["app"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["app/**/*.ts", "tests/**/*.ts"]
 }
