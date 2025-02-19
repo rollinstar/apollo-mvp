@@ -1,4 +1,5 @@
-import { db } from '../../common/prisma';
+import { db } from '@xcore/neo/db/prisma';
+
 import { CreateStorageRequestDto } from '../../models/storage';
 
 export const create = async (payload: CreateStorageRequestDto) => {

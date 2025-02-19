@@ -1,7 +1,6 @@
+import { getMembers, logout, register, signin } from '@xcore/modules/controllers/user.controller';
+import { $ref } from '@xcore/schemas/user.schema';
 import { FastifyInstance } from 'fastify';
-
-import { $ref } from '../../schemas/user.schema';
-import { getMembers, logout, register, signin } from '../controllers/user.controller';
 
 const registerRouteSchema = {
   tags: ['USER'],

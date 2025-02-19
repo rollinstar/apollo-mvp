@@ -4,9 +4,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "start": "node dist/server.js",
-    "dev": "tsc && node dist/server.js"
+    "dev": "ts-node-dev --respawn --transpile-only --pretty -r tsconfig-paths/register app/server.ts",
+    "dev:nodemon": "nodemon --exec ts-node -r tsconfig-paths/register app/server.ts",
+    "test:unit": "jest --config jest.config.js"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
@@ -15,7 +17,6 @@
     "@fastify/sensible": "^6.0.2",
     "@fastify/swagger": "^9.4.2",
     "@fastify/swagger-ui": "^5.2.1",
-    "@prisma/client": "^6.3.0",
     "bcrypt": "^5.1.1",
     "fastify": "^5.2.1",
     "fastify-swagger": "^5.2.0",
@@ -24,7 +25,12 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@prisma/client": "^6.3.1",
     "@types/bcrypt": "^5.0.2",
-    "prisma": "^6.3.0"
+    "nodemon": "^3.1.9",
+    "prisma": "^6.3.1",
+    "ts-node-dev": "^2.0.0",
+    "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0"
   }
 }

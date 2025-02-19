@@ -4,8 +4,9 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "lib": ["ES2021.String"]
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
-  "include": ["apps/**/*.ts"],
   "exclude": ["node_modules", "docker"],
 }

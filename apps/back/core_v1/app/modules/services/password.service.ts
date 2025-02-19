@@ -1,6 +1,6 @@
-import { InternalServerError, UnauthorizedError } from '../../common/app-errors/error.handlers';
-import { db } from '../../common/prisma';
-import { CreatePasswordRequestDto } from '../../models/password';
+import { CreatePasswordRequestDto } from '@xcore/models/password';
+import { InternalServerError, UnauthorizedError } from '@xcore/neo/app-errors/error.handlers';
+import { db } from '@xcore/neo/db/prisma';
 
 export const create = (payload: CreatePasswordRequestDto) => {
   return db.password.create({ data: { ...payload } });

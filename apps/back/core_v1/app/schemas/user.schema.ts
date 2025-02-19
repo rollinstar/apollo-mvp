@@ -1,12 +1,11 @@
+import { authenticationSchema } from '@xcore/models/authentication';
+import { registerUserSchema } from '@xcore/models/model';
+import { memberSchema, organizationSchema } from '@xcore/models/organization';
+import { profileSchema } from '@xcore/models/profile';
+import { storageSchema } from '@xcore/models/storage';
+import { userSchema } from '@xcore/models/user';
 import { buildJsonSchemas } from 'fastify-zod';
 import { z } from 'zod';
-
-import { authenticationSchema } from '../models/authentication';
-import { registerUserSchema } from '../models/model';
-import { memberSchema, organizationSchema } from '../models/organization';
-import { profileSchema } from '../models/profile';
-import { storageSchema } from '../models/storage';
-import { userSchema } from '../models/user';
 
 export const ResponseBaseSchemas = {
   message: z.string(),

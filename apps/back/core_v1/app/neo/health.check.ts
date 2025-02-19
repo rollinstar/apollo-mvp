@@ -1,4 +1,4 @@
-import { db } from './prisma';
+import { db } from '@xcore/neo/db/prisma';
 
 type dbConnectionCheck = 'healthy' | 'unhealthy';
 export const checkDatabaseConnection = async (): Promise<dbConnectionCheck> => {
